@@ -383,7 +383,7 @@ function deleteMarkers() {
 }
 
 async function getCSVData() {
-    fetch('http://localhost:8080/csv', {
+    fetch('https://ancient-temple-93051.herokuapp.com/csv', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -485,7 +485,7 @@ function restore () {
   // first, reset the function 
   reset();
 
-    fetch('http://localhost:8080/restore', {
+    fetch('https://ancient-temple-93051.herokuapp.com/restore', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -506,7 +506,7 @@ function restore () {
 }
 
 function connect() {
-  fetch('http://localhost:8080/post', {
+  fetch('https://ancient-temple-93051.herokuapp.com/post', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -532,7 +532,7 @@ function connect() {
 }
 
 function test() {
-  fetch('http://localhost:8080/test', {
+  fetch('https://ancient-temple-93051.herokuapp.com/test', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -560,7 +560,7 @@ function test() {
 // this is not the correct goddamn function
 function access() {
   var input = document.getElementById("codeInput");
-  fetch('http://localhost:8080/access', {
+  fetch('https://ancient-temple-93051.herokuapp.com/access', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
