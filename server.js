@@ -108,10 +108,11 @@ app.post('/data', function(req, res) {
 	var longitude = parseFloat(str[1]);
 	var alt = parseFloat(str[2]);
 	var temperature = parseFloat(str[3]);
+	var speedIndicator = parseFloat(str[4]);
 	var satNum = req.body.IMEI;
 	
 
-	var obj = {status: "active", lat: latitude,lng: longitude, temp: temperature, Sat: satNum, speed: alt};
+	var obj = {status: "active", lat: latitude,lng: longitude, temp: temperature, Sat: alt, speed: speedIndicator};
 	//{status: "active", code: str};
 	// {status: "active", lat: latitude,lng: longitude, temp: temperature, Sat: satNum, speed: alt};
 	console.log(obj.status);
@@ -121,7 +122,7 @@ app.post('/data', function(req, res) {
 	console.log(obj.Sat);
 	console.log(obj.speed);
 
-	data.push({status: "active", lat: latitude,lng: longitude, temp: temperature, Sat: alt, speed: satNum});
+	data.push({status: "active", lat: latitude,lng: longitude, temp: temperature, Sat: alt, speed: speedIndicator});
 	console.log((typeof({status: "active", lat: latitude,lng: longitude, temp: temperature, Sat: satNum, speed: alt})));
 
 	dataCounter++;

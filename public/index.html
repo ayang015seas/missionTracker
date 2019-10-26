@@ -147,7 +147,7 @@
                 <h2 class="display h4">Altitude: </h2>
                 <div class="number"><strong><span id = "alt">L.O.S </span></strong></div>
                 <br>
-                <h2 class="display h4">Temperature: </h2>
+                <h2 class="display h4">Course: </h2>
                 <div class="number"><strong><span id = "temp">L.O.S</span></strong></div>
               </div>
 
@@ -301,7 +301,7 @@ var map;
   var lngStatus = document.getElementById("lng");
   var speedStatus = document.getElementById("speed");
   altStatus.innerHTML = info.Sat + ' (m)';
-  tempStatus.innerHTML = info.temp + ' °F';
+  tempStatus.innerHTML = info.temp + ' °C';
   latStatus.innerHTML = "Lat: " + info.lat;
   lngStatus.innerHTML = "Lng: " + info.lng;
   speedStatus.innerHTML = info.speed;
@@ -315,8 +315,8 @@ var map;
     '<p><strong>Marker: '+ markerNum + '</strong></p>' +
     '<p>Lat: '+ info.lat + ' °N' + '</p>' +
     '<p>Lng: '+ info.lng + ' °W' +'</p>' +
-    '<p>Temp: '+ info.temp + ' °F' + '</p>'+
-    '<p>Speed: '+ info.speed + ' km/h' + '</p>'+ 
+    '<p>Course: '+ info.temp + '</p>'+
+    '<p>Speed: '+ info.speed + ' m/s' + '</p>'+ 
     '<p>Alt: '+ info.Sat + ' (m)' + '</p>'+ 
     '</p>'+
     '</div>'+
