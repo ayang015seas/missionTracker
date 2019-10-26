@@ -136,7 +136,7 @@
                 <strong id = "seconds">00</strong>
                 </div>
                 <br>
-                <h2 class="display h4">Speed: </h2>
+                <h2 class="display h4">Sat Number: </h2>
                 <div class="number"><strong><span id = "speed">L.O.S</strong></span></div>
               </div>
 
@@ -234,14 +234,17 @@ function reset() {
   minutes.innerHTML = "00:";
   seconds.innerHTML = "00";
 
+
   stopTime();
-  clearMarkers();
-  deleteMarkers();
-    polyline = null;
+  resetServer();
+  polyline = null;
     for (var i = 0; i < polylines.length; i++) {
-      polylines[i] = null;
+      polyline = polylines[i];
+      polyline.setMap(null);
     }
-    polyline.setMap(null);
+  // clearMarkers();
+  deleteMarkers();
+
 }
 
 function startTime() {
@@ -301,7 +304,7 @@ var map;
   tempStatus.innerHTML = info.temp + ' °F';
   latStatus.innerHTML = "Lat: " + info.lat;
   lngStatus.innerHTML = "Lng: " + info.lng;
-  speedStatus.innerHTML = info.speed + " km/h";
+  speedStatus.innerHTML = info.speed;
 
     markerNum++;
 
@@ -383,7 +386,7 @@ function deleteMarkers() {
 }
 
 async function getCSVData() {
-    fetch('http://localhost:8080/csv', {
+    fetch('https://ancient-temple-93051.herokuapp.com/csv', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -482,22 +485,71 @@ function testFunction() {
 }
 
 function restore () {
-  // first, reset the function 
-  reset();
+  if (collecting == true) {
+    alert("Already Collecting!");
+    return;
+  }
 
-    fetch('http://localhost:8080/restore', {
+  collecting = true;
+  interval = setInterval(function (){
+  rest()}, 5000);
+
+  var seconds = 0;
+  
+  timer = setInterval(function() {
+  var displaySeconds = Math.floor(seconds % 60);
+  var displayHours = Math.floor(seconds / 3600);
+  var displayMinutes = Math.floor(seconds / 60) % 60;
+
+  var hours = document.getElementById("hours");
+  var minutes = document.getElementById("minutes");
+  var secs = document.getElementById("seconds");
+
+  if (displayHours < 10) {
+    hours.innerHTML = "0" + displayHours + ": ";
+  }
+  else {
+    hours.innerHTML = displayHours + ": ";
+  }
+
+  if (displayMinutes < 10) {
+    minutes.innerHTML = "0" + displayMinutes + ": ";
+  }
+  else {
+    minutes.innerHTML = displayMinutes + ": ";
+  }
+
+  if (displaySeconds < 10) {
+    secs.innerHTML = "0" + displaySeconds + "";
+  }
+  else {
+    secs.innerHTML = displaySeconds + "";
+  }
+  seconds++;
+  }, 1000);
+}
+
+// 
+function connect() {
+  fetch('https://ancient-temple-93051.herokuapp.com/post', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
 
     },
-    body: JSON.stringify({request: "Restore"})
+    body: JSON.stringify({status: "Passive", url: "Test"})
   }).then(function (res) {
-    res.json().then(function(data){
-      for (var i = 0; i < data.length; i++) {
-        var lat = data[i].lat;
-        var lng = data[i].lng;
-        addMarker({lat: lat, lng: lng}, data[i]);    
+    document.getElementById("server").innerHTML = res.status;
+    res.json().then(function(text){
+    	console.log(text);
+      if (text.status == 'active') {
+        var lat = text.lat;
+        var lng = text.lng;
+        console.log("Check");
+        addMarker({lat: lat, lng: lng}, text);
+      }
+      else {
+        // do nothing 
       }
     });
     //document.getElementById("server").innerHTML = res.status;
@@ -505,8 +557,36 @@ function restore () {
   }).catch(document.getElementById("server").innerHTML = "404");
 }
 
-function connect() {
-  fetch('http://localhost:8080/post', {
+// function to restore past data
+function rest() {
+  fetch('https://ancient-temple-93051.herokuapp.com/restore', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+
+    },
+    body: JSON.stringify({status: "Passive", url: "Test"})
+  }).then(function (res) {
+    document.getElementById("server").innerHTML = res.status;
+    res.json().then(function(text){
+    	console.log(text);
+      if (text.status == 'active') {
+        var lat = text.lat;
+        var lng = text.lng;
+        console.log("Check");
+        addMarker({lat: lat, lng: lng}, text);
+      }
+      else {
+        // do nothing 
+      }
+    });
+    //document.getElementById("server").innerHTML = res.status;
+    // console.log(res);
+  }).catch(document.getElementById("server").innerHTML = "404");
+}
+
+function test() {
+  fetch('https://ancient-temple-93051.herokuapp.com/test', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -531,8 +611,8 @@ function connect() {
   }).catch(document.getElementById("server").innerHTML = "404");
 }
 
-function test() {
-  fetch('http://localhost:8080/test', {
+function resetServer() {
+  fetch('https://ancient-temple-93051.herokuapp.com/reset', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -541,7 +621,22 @@ function test() {
     body: JSON.stringify({status: "Passive", url: "Test"})
   }).then(function (res) {
     document.getElementById("server").innerHTML = res.status;
-    res.json().then(function(text){
+    //document.getElementById("server").innerHTML = res.status;
+    // console.log(res);
+  }).catch(document.getElementById("server").innerHTML = "404");
+}
+
+function getData() {
+  fetch('https://ancient-temple-93051.herokuapp.com/data', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+
+    },
+    body: JSON.stringify({status: "Passive", url: "Test"})
+  }).then(function (res) {
+    document.getElementById("server").innerHTML = res.status;
+    res.json().then(function(text) {
       if (text.status == 'active') {
         var lat = text.lat;
         var lng = text.lng;
@@ -560,7 +655,7 @@ function test() {
 // this is not the correct goddamn function
 function access() {
   var input = document.getElementById("codeInput");
-  fetch('http://localhost:8080/access', {
+  fetch('https://ancient-temple-93051.herokuapp.com/access', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

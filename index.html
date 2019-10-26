@@ -92,7 +92,7 @@
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
     <form class="form-inline mr-auto" action = "/access/" method = "post">
       <input name = "input" class="form-control" type="text" placeholder="Access Code">
-      <input type="submit" value = "Submit" class="btn btn-outline-success btn-sm my-0 ml-sm-2">
+      <input type="submit" value = "Submit2" class="btn btn-outline-success btn-sm my-0 ml-sm-2">
     </form>
 
               </ul>
@@ -234,14 +234,16 @@ function reset() {
   minutes.innerHTML = "00:";
   seconds.innerHTML = "00";
 
+
   stopTime();
-  clearMarkers();
-  deleteMarkers();
-    polyline = null;
+  polyline = null;
     for (var i = 0; i < polylines.length; i++) {
-      polylines[i] = null;
+      polyline = polylines[i];
+      polyline.setMap(null);
     }
-    polyline.setMap(null);
+  // clearMarkers();
+  deleteMarkers();
+
 }
 
 function startTime() {
@@ -252,7 +254,7 @@ function startTime() {
 
   collecting = true;
   interval = setInterval(function (){
-  connect()}, 5000);
+  getData()}, 5000);
 
   var seconds = 0;
   
@@ -440,7 +442,7 @@ function timeTest() {
 
   collecting = true;
   interval = setInterval(function (){
-  test()}, 5000);
+  getData()}, 5000);
 
   var seconds = 0;
   
@@ -483,9 +485,9 @@ function testFunction() {
 
 function restore () {
   // first, reset the function 
-  reset();
-
-    fetch('https://ancient-temple-93051.herokuapp.com/restore', {
+  // reset();
+  console.log("MARKER1");
+  fetch('http//localhost:8080/restore', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -493,16 +495,21 @@ function restore () {
     },
     body: JSON.stringify({request: "Restore"})
   }).then(function (res) {
+    console.log(res);
     res.json().then(function(data){
+      console.log("MARKER2");
       for (var i = 0; i < data.length; i++) {
         var lat = data[i].lat;
         var lng = data[i].lng;
-        addMarker({lat: lat, lng: lng}, data[i]);    
+        // addMarker({lat: lat, lng: lng}, data[i]);   
+        console.log("MARKER3"); 
       }
     });
-    //document.getElementById("server").innerHTML = res.status;
+    console.log("MARKER4");
+    document.getElementById("server").innerHTML = res.status;
     // console.log(res);
   }).catch(document.getElementById("server").innerHTML = "404");
+  console.log("MARKER5");
 }
 
 function connect() {
@@ -542,6 +549,32 @@ function test() {
   }).then(function (res) {
     document.getElementById("server").innerHTML = res.status;
     res.json().then(function(text){
+      if (text.status == 'active') {
+        var lat = text.lat;
+        var lng = text.lng;
+        console.log("Check");
+        addMarker({lat: lat, lng: lng}, text);
+      }
+      else {
+        // do nothing 
+      }
+    });
+    //document.getElementById("server").innerHTML = res.status;
+    // console.log(res);
+  }).catch(document.getElementById("server").innerHTML = "404");
+}
+
+function getData() {
+  fetch('https://ancient-temple-93051.herokuapp.com/data', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+
+    },
+    body: JSON.stringify({status: "Passive", url: "Test"})
+  }).then(function (res) {
+    document.getElementById("server").innerHTML = res.status;
+    res.json().then(function(text) {
       if (text.status == 'active') {
         var lat = text.lat;
         var lng = text.lng;
