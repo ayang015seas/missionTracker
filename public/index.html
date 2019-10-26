@@ -92,7 +92,7 @@
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
     <form class="form-inline mr-auto" action = "/access/" method = "post">
       <input name = "input" class="form-control" type="text" placeholder="Access Code">
-      <input type="submit" value = "Submit" class="btn btn-outline-success btn-sm my-0 ml-sm-2">
+      <input type="submit" value = "Submit_" class="btn btn-outline-success btn-sm my-0 ml-sm-2">
     </form>
 
               </ul>
@@ -386,7 +386,7 @@ function deleteMarkers() {
 }
 
 async function getCSVData() {
-    fetch('https://ancient-temple-93051.herokuapp.com/csv', {
+    fetch('https://missiontracker.herokuapp.com/csv', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -531,7 +531,7 @@ function restore () {
 
 // 
 function connect() {
-  fetch('https://ancient-temple-93051.herokuapp.com/post', {
+  fetch('https://missiontracker.herokuapp.com/post', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -559,7 +559,7 @@ function connect() {
 
 // function to restore past data
 function rest() {
-  fetch('https://ancient-temple-93051.herokuapp.com/restore', {
+  fetch('https://missiontracker.herokuapp.com/restore', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -586,7 +586,7 @@ function rest() {
 }
 
 function test() {
-  fetch('https://ancient-temple-93051.herokuapp.com/test', {
+  fetch('https://missiontracker.herokuapp.com/test', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -612,7 +612,7 @@ function test() {
 }
 
 function resetServer() {
-  fetch('https://ancient-temple-93051.herokuapp.com/reset', {
+  fetch('https://missiontracker.herokuapp.com/reset', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -627,7 +627,7 @@ function resetServer() {
 }
 
 function getData() {
-  fetch('https://ancient-temple-93051.herokuapp.com/data', {
+  fetch('https://missiontracker.herokuapp.com/data', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -655,7 +655,7 @@ function getData() {
 // this is not the correct goddamn function
 function access() {
   var input = document.getElementById("codeInput");
-  fetch('https://ancient-temple-93051.herokuapp.com/access', {
+  fetch('https://missiontracker.herokuapp.com/access', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
