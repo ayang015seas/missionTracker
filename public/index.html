@@ -64,15 +64,15 @@
         <div class="main-menu">
           <h5 class="sidenav-heading">Main</h5>
           <ul id="side-main-menu" class="side-menu list-unstyled">                  
-            <li><a onclick="startTime()"> <i class="icon-clock"></i>Collect                             </a></li>
-            <li><a onclick = "timeTest()"><i class="icon-flask"></i>Test (beta) </a></li>
-            <li><a onclick="reset()"> <i class="icon-rss-feed"></i>Reset                             </a></li>
-            <li><a onclick="stopTime()"> <i class="icon-close"></i>Stop                             </a></li>
+            <li><a onclick="startTime()" style="cursor: pointer;"> <i class="icon-clock"></i>Collect                             </a></li>
+            <li><a onclick = "timeTest()" style="cursor: pointer;"><i class="icon-flask"></i>Test (beta) </a></li>
+            <li><a onclick="reset()" style="cursor: pointer;"> <i class="icon-rss-feed"></i>Reset                             </a></li>
+            <li><a onclick="stopTime()" style="cursor: pointer;"> <i class="icon-close"></i>Stop                             </a></li>
             <li><a href="http://habhub.org/calc/"> <i class="icon-page"></i>Calculator                             </a></li>
-            <li><a onclick="restore()"> <i class="icon-interface-windows"></i>Restore Data                             </a></li>
-            <li> <a onclick="getCSVData()"> <i class="icon-mail"></i>CSV Data
+            <li><a onclick="restore()" style="cursor: pointer;"> <i class="icon-interface-windows"></i>Restore Data                             </a></li>
+            <li> <a onclick="getCSVData()" style="cursor: pointer;"> <i class="icon-mail"></i>CSV Data
                 </a></li>
-            <li><a href = "https://obscure-dawn-83105.herokuapp.com/"><i class="fa fa-bar-chart"></i>Old App                       </a></li>
+            <li><a href = "https://obscure-dawn-83105.herokuapp.com/"><i class="fa fa-bar-chart" style="cursor: pointer;"></i>Old App                       </a></li>
           </ul>
         </div>
       </div>
@@ -92,7 +92,7 @@
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
     <form class="form-inline mr-auto" action = "/access/" method = "post">
       <input name = "input" class="form-control" type="text" placeholder="Access Code">
-      <input type="submit" value = "Submit_" class="btn btn-outline-success btn-sm my-0 ml-sm-2">
+      <input type="submit" value = "Submit" class="btn btn-outline-success btn-sm my-0 ml-sm-2">
     </form>
 
               </ul>
