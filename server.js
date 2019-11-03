@@ -98,8 +98,10 @@ app.post('/restore', function(req, res) {
 });
 
 app.post('/data', function(req, res) {
+	try {
+
 	console.log(req.body);
-	var hex2 = hex2a(req.body.Data);
+	var hex2 = hex2a(req.body.data);
 
 	var str = hex2.split(",");
 
@@ -127,6 +129,7 @@ app.post('/data', function(req, res) {
 
 	dataCounter++;
 	newData = true;
+	}
 	res.send(200);
 });
 
