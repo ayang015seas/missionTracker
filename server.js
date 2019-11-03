@@ -129,8 +129,10 @@ app.post('/data', function(req, res) {
 
 	dataCounter++;
 	newData = true;
-	}
 	res.send(200);
+	} catch {
+		res.send(200);
+	}
 });
 
 // establish access
